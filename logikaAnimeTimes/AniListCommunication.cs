@@ -26,8 +26,8 @@ namespace logikaAnimeTimes
 
             public GraphQLQuery(string query, Dictionary<string, object> variables)
             {
-                Query = Query;
-                Variables = Variables;
+                Query = query;
+                Variables = variables;
             }
         }
 
