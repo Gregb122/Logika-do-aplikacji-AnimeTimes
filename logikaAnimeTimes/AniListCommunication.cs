@@ -35,11 +35,13 @@ namespace logikaAnimeTimes
         {
             private readonly string raw;
             private readonly JObject data;
+            private readonly string errors;
 
             public GraphQlQueryResponse(string raw)
             {
                 this.raw = raw;
                 data = raw != null ? JObject.Parse(raw) : null;
+                errors = data["errors"] != null ? data["errors"].ToString() : null;
             }
 
             public string GetRaw()
@@ -47,9 +49,34 @@ namespace logikaAnimeTimes
                 return raw;
             }
 
-            public JObject GetData()
+            public string GetErrors()
             {
-                return data;
+                return errors;
+            }
+
+            public T GetData<T>(string key)
+            {
+                if (data == null) return default(T);
+                try
+                {
+                    return JsonConvert.DeserializeObject<T>(data["data"][key].ToString());
+                }
+                catch
+                {
+                    return default(T);
+                }
+            }
+
+            public dynamic GetData(string key)
+            {
+                try
+                {
+                    return JsonConvert.DeserializeObject<dynamic>(data["data"][key].ToString());
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
 
@@ -71,7 +98,6 @@ namespace logikaAnimeTimes
             string reponse = await RequestAsync(url, jsonContent);
 
             return new GraphQlQueryResponse(reponse);
-
         }
 
         private async Task<string> RequestAsync(string url, string json)
