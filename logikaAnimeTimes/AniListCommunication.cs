@@ -1,4 +1,4 @@
-﻿using logikaAnimeTimes.Interfaces;
+﻿using logikaAnimeTimes.AbstractClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +14,14 @@ using Newtonsoft.Json.Linq;
 
 namespace logikaAnimeTimes
 {
-    class AniListCommunication : ICommunication
+    /// <summary>
+    /// Komunikacja z api AniList
+    /// </summary>
+    class AniListCommunication : Communication
     {
+        /// <summary>
+        /// Klasa zawierająca zapytanie na serwer anilist
+        /// </summary>
         private class GraphQLQuery
         {
             [JsonProperty("query")]
@@ -31,58 +37,14 @@ namespace logikaAnimeTimes
             }
         }
 
-        public class GraphQlQueryResponse
-        {
-            private readonly string raw;
-            private readonly JObject data;
-            private readonly string errors;
-
-            public GraphQlQueryResponse(string raw)
-            {
-                this.raw = raw;
-                data = raw != null ? JObject.Parse(raw) : null;
-                errors = data["errors"] != null ? data["errors"].ToString() : null;
-            }
-
-            public string GetRaw()
-            {
-                return raw;
-            }
-
-            public string GetErrors()
-            {
-                return errors;
-            }
-
-            public T GetData<T>(string key)
-            {
-                if (data == null) return default(T);
-                try
-                {
-                    return JsonConvert.DeserializeObject<T>(data["data"][key].ToString());
-                }
-                catch
-                {
-                    return default(T);
-                }
-            }
-
-            public dynamic GetData(string key)
-            {
-                try
-                {
-                    return JsonConvert.DeserializeObject<dynamic>(data["data"][key].ToString());
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-        }
 
         private HttpClient client;
         private readonly string url;
 
+        /// <summary>
+        /// Domyślny konstruktor
+        /// </summary>
+        /// <param name="url"></param>
         public AniListCommunication(string url)
         {
             client = new HttpClient();
@@ -90,7 +52,13 @@ namespace logikaAnimeTimes
             this.url = url;
         }
 
-        public async Task<GraphQlQueryResponse> MakeRequestAsync(string query, Dictionary<string, object> variables)
+        /// <summary>
+        /// Tworzy zapytanie i odpowiedź z serwera AniList
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="variables"></param>
+        /// <returns></returns>
+        public override async Task<GraphQlQueryResponse> MakeRequestAsync(string query, Dictionary<string, object> variables)
         {
             GraphQLQuery q = new GraphQLQuery(query, variables);
 
@@ -100,6 +68,12 @@ namespace logikaAnimeTimes
             return new GraphQlQueryResponse(reponse);
         }
 
+        /// <summary>
+        /// Wysyła zapytanie i odbiera odpowiedź
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="json"></param>
+        /// <returns></returns>
         private async Task<string> RequestAsync(string url, string json)
         {
             HttpContent validJson = new StringContent(json, Encoding.UTF8, "application/json");

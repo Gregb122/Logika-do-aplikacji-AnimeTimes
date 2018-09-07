@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="logikaAnimeTimes.AbstractClasses.Communication" Collapsed="true">
+    <Position X="0.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AbstractClasses\Communication.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="logikaAnimeTimes.AniListCommunication">
+    <Position X="0.75" Y="2.5" Width="1.75" />
+    <NestedTypes>
+      <Class Name="logikaAnimeTimes.AniListCommunication.GraphQLQuery" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>AniListCommunication.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAgAAAAAAIAAAAAAAABAAAAAA=</HashCode>
+      <FileName>AniListCommunication.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="logikaAnimeTimes.DataHandler" Collapsed="true">
+    <Position X="3.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQIAQAAAAAAAAAAgAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="logikaAnimeTimes.Display" Collapsed="true">
+    <Position X="5.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Display.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="logikaAnimeTimes.Program" Collapsed="true">
+    <Position X="3.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
